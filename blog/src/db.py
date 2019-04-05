@@ -14,7 +14,6 @@ TABLES['users'] = (
     "   `fullname` VARCHAR(255) NOT NULL,"
     "   `username` VARCHAR(30) NOT NULL,"
     "   `password` CHAR(255) NOT NULL,"
-    "   `age` INT,"
     "   `created_at` TIMESTAMP,"
     "   PRIMARY KEY (`id`),"
     "   UNIQUE KEY `username` (`username`)"
@@ -36,18 +35,21 @@ TABLES['blogs'] = (
     ") ENGINE=InnoDB"
 )
 
+IS_EXIST = False
+
 cnx = mysql.connector.connect(user='cuong', password='1', host='localhost', port='3306')
 cursor = cnx.cursor()
 def create_database(cursor):
     try:
         cursor.execute(
-            "CREATE DATABASE {} CHARACTER SET utf8 COLLATE utf8_general_ci".format(DB_NAME)
+            "CREATE DATABASE IF NOT EXISTS {} CHARACTER SET utf8 COLLATE utf8_general_ci".format(DB_NAME)
         )
     except mysql.connector.Error as err:
         print(err)
         exit(1)
 
 try:
+    IS_EXIST = True
     cursor.execute("USE {}".format(DB_NAME))
 except mysql.connector.Error as err:
     if err.errno == errorcode.ER_BAD_DB_ERROR:
@@ -58,27 +60,21 @@ except mysql.connector.Error as err:
         print(err)
         exit(1)
 
-for table in TABLES:
-    table_desc = TABLES[table]
-    try:
-        print('Creating {} '.format(table), end='')
-        cursor.execute(table_desc)
-    except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
-            print("Table already exist")
+# is_created = cursor.execute(SELECT_DATABASE, {'db_name': DB_NAME})
+# print(is_created)
+if IS_EXIST == False:
+    for table in TABLES:
+        table_desc = TABLES[table]
+        try:
+            print('Creating {} '.format(table), end='')
+            cursor.execute(table_desc)
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
+                print("Table already exist")
+            else:
+                print(err.msg)
         else:
-            print(err.msg)
-    else:
-        print("ok")
-
-# Insert data
-now = datetime.now()
-
-
-
-add_blog = ("INSERT INTO blogs"
-            "(title, content, created_at, user_id) "
-            "VALUES (%(title)s, %(content)s, %(created_at)s, %(user_id)s)")
+            print("ok")
 
 cursor.close()
 cnx.close()

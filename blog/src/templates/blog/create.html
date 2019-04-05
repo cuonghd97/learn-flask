@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}
+Write post
+{% endblock %}
+
+{% block banner %}
+{% endblock %}
+
+{% block post %}
+<div class="columns medium-9">
+    <form>
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+                <div class="row">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <div class="medium-6 cell">
+                        <label>
+                            Title
+                            <input type="text" name="title" id="title" placeholder="Title....">
+                        </label>
+                    </div>
+                    <div class="medium-6 cell">
+                        <label>
+                            Image
+                            <input type="file" name="image" id="image">
+                        </label>
+                    </div>
+                    <div class="medium-10 cell">
+                        <label>
+                            Content
+                            <textarea name="content" id="content" rows="10" style="width: 100%;"
+                                placeholder="Content...">
+
+                                </textarea>
+                        </label>
+                    </div>
+                    <div class="medium-6 cell">
+                        <button class="button success btn-save">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/blog/create.js') }}"></script>
+{% endblock %}
