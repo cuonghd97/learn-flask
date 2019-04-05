@@ -1,0 +1,22 @@
+{% extends 'auth/layouts/base.html' %}
+{% block title %}
+    Login page
+{% endblock %}
+
+{% block body %}
+<div class="row column medium-5">
+    <form class="log-in-form">
+        <h4 class="text-center">Log in with you email account</h4>
+        <label
+            >Username
+            <input type="text" placeholder="somebody@example.com" />
+        </label>
+        <label
+            >Password
+            <input type="password" placeholder="Password" />
+        </label>
+        <p><input type="submit" class="button expanded" value="Log in" /></p>
+        <p class="text-center"><a href="#">Forgot your password?</a></p>
+    </form>
+</div>
+{% endblock %}

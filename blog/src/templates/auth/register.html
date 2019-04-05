@@ -1,0 +1,30 @@
+{% extends 'auth/layouts/base.html' %}
+
+{% block title %}
+Register page
+{% endblock %}
+
+{% block body %}
+<div class="row column medium-5">
+    <form class="log-in-form" method="POST">
+        <h4 class="text-center">Register</h4>
+        <label
+            >Full Name
+            <input type="text" placeholder="Full Name" name="fullname" required/>
+        </label>
+        <label
+            >Birthday
+            <input type="text" placeholder="Birthday" name="birthday" required/>
+        </label>
+        <label
+            >Username
+            <input type="text" placeholder="Username" name="username" required/>
+        </label>
+        <label
+            >Password
+            <input type="password" placeholder="Password" name="password" required/>
+        </label>
+        <p><input type="submit" class="button expanded" value="Register" /></p>
+    </form>
+</div>
+{% endblock %}

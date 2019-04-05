@@ -13,7 +13,7 @@ TABLES['users'] = (
     "   `id` INT NOT NULL AUTO_INCREMENT,"
     "   `fullname` VARCHAR(255) NOT NULL,"
     "   `username` VARCHAR(30) NOT NULL,"
-    "   `password` CHAR(30) NOT NULL,"
+    "   `password` CHAR(255) NOT NULL,"
     "   `age` INT,"
     "   `created_at` TIMESTAMP,"
     "   PRIMARY KEY (`id`),"
@@ -26,6 +26,7 @@ TABLES['blogs'] = (
     "CREATE TABLE `blog`("
     "   `id` INT NOT NULL AUTO_INCREMENT,"
     "   `title` VARCHAR(255) NOT NULL,"
+    "   `category` VARCHAR(255) NOT NULL,"
     "   `content` LONGTEXT,"
     "   `created_at` TIMESTAMP,"
     "   `user_id` INT NOT NULL,"
@@ -78,19 +79,6 @@ now = datetime.now()
 add_blog = ("INSERT INTO blogs"
             "(title, content, created_at, user_id) "
             "VALUES (%(title)s, %(content)s, %(created_at)s, %(user_id)s)")
-
-def add_user(data_user):
-    cnx = mysql.connector.connect(user='cuong', password='1', host='localhost', port='3306', database='blog')
-    cursor = cnx.cursor()
-    add_user = ("INSERT INTO users "
-            "(fullname, username, password, age, created_at) "
-            "VALUES (%(username)s, %(fullname)s, %(password)s, %(age)s, %(created_at)s)")
-    cursor.execute(add_user, data_user)
-    cnx.commit()
-    cursor.close()
-    cnx.close()
-    return 'ok'
-
 
 cursor.close()
 cnx.close()
