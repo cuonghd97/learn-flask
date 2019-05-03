@@ -16,7 +16,6 @@ parser.add_argument('password', help='Password can\'t be none', required=True)
 class UserRegist(Resource):
     def post(self):
         data = parser.parse_args()
-        print('asdasd')
         if UserModel.find_by_username(data['username']):
             return {'message': 'User {} already exists'.format(data['username'])}
         new_user = UserModel(
