@@ -5,6 +5,7 @@ import api.error as error
 
 parser = reqparse.RequestParser()
 
+
 class TodoGetData(Resource):
     def post(self):
         parser.add_argument('work', help='Work can not be none', required=True)
@@ -26,9 +27,11 @@ class TodoGetData(Resource):
     def delete(self):
         return Todo.delete_done()
 
+
 class TodoMidifyItem(Resource):
     def put(self, id):
         return Todo.change_done(id)
+
 
     def delete(self, id):
         return Todo.delete_one(id)

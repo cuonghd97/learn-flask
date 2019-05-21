@@ -2,6 +2,7 @@ from flask_restful import Api
 
 from api.handlers.TodoHandlers import TodoGetData, TodoMidifyItem
 
+
 def generate_routes(app):
     api = Api(app)
 
