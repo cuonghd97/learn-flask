@@ -8,8 +8,10 @@ pymysql.install_as_MySQLdb()
 import logging
 from logging.handlers import RotatingFileHandler
 from flask import Flask
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 jwt = JWTManager(app)
 
