@@ -30,14 +30,6 @@ class App extends Component {
             })
     }
 
-    componentDidMount() {
-    }
-
-    click = () => {
-        // notify.show("Hello")
-        // this.login()
-    }
-
     handleFormSubmit = (e) => {
         e.preventDefault()
         this.login(this.state.username, this.state.password)
